@@ -231,6 +231,45 @@
       <button class="btn btn-no" onclick="handleResponse(false)">拒绝 ❌</button>
     </div>
     
+    <div class="menu-section" id="menuSection">
+      <div class="menu-title">🍽️ 琦琦想吃什么？</div>
+      <div class="menu-grid">
+        <div class="menu-item" onclick="selectDish(this, '菠萝咕噜肉')">
+          <span class="emoji">🍍</span>
+          <span class="name">菠萝咕噜肉</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '可乐鸡翅')">
+          <span class="emoji">🍗</span>
+          <span class="name">可乐鸡翅</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '糖醋排骨')">
+          <span class="emoji">🍖</span>
+          <span class="name">糖醋排骨</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '麻婆豆腐')">
+          <span class="emoji">🍲</span>
+          <span class="name">麻婆豆腐</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '宫保鸡丁')">
+          <span class="emoji">🥘</span>
+          <span class="name">宫保鸡丁</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '鱼香肉丝')">
+          <span class="emoji">🍜</span>
+          <span class="name">鱼香肉丝</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '红烧茄子')">
+          <span class="emoji">🍆</span>
+          <span class="name">红烧茄子</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '番茄炒蛋')">
+          <span class="emoji">🍅</span>
+          <span class="name">番茄炒蛋</span>
+        </div>
+      </div>
+      <button class="confirm-btn" id="confirmBtn" onclick="confirmDish()">确认点单 🎉</button>
+    </div>
+    
     <div class="message" id="message"></div>
     
     <div class="footer">
@@ -239,14 +278,18 @@
   </div>
   
   <script>
+    let selectedDish = null;
+    
     function handleResponse(accepted) {
       const messageEl = document.getElementById('message');
       
       if (accepted) {
-        messageEl.innerHTML = '🎉 太棒了！琦琦接受邀请！<br>明天晚上见！';
+        messageEl.innerHTML = '🎉 太棒了！琦琦接受邀请！<br>快选选想吃什么～';
         messageEl.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
         messageEl.style.color = '#2e7d32';
-        createConfetti();
+        
+        // 显示菜单
+        document.getElementById('menuSection').classList.add('show');
       } else {
         messageEl.innerHTML = '😢 好吧... 华华会等你的！<br>（开玩笑的，下次再约～）';
         messageEl.style.background = 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)';
@@ -258,6 +301,36 @@
       // 隐藏按钮
       document.querySelector('.buttons').style.display = 'none';
     }
+    
+    function selectDish(element, dishName) {
+      // 移除其他选项的选中状态
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('selected');
+      });
+      
+      // 选中当前选项
+      element.classList.add('selected');
+      selectedDish = dishName;
+      
+      // 显示确认按钮
+      document.getElementById('confirmBtn').classList.add('show');
+    }
+    
+    function confirmDish() {
+      if (!selectedDish) return;
+      
+      const finalMessageEl = document.getElementById('finalMessage');
+      finalMessageEl.innerHTML = `🎉 好哒！琦琦点了 <strong>${selectedDish}</strong>！<br>华华明天准备好～`; 
+      finalMessageEl.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
+      finalMessageEl.style.color = '#2e7d32';
+      finalMessageEl.classList.add('show');
+      
+      createConfetti();
+      
+      // 隐藏菜单
+      document.getElementById('menuSection').style.display = 'none';
+    }
+  </script>
     
     function createConfetti() {
       const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
