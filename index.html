@@ -231,6 +231,45 @@
       <button class="btn btn-no" onclick="handleResponse(false)">拒绝 ❌</button>
     </div>
     
+    <div class="menu-section" id="menuSection" style="display: none;">
+      <div class="menu-title">🍽️ 琦琦想吃什么？</div>
+      <div class="menu-grid">
+        <div class="menu-item" onclick="selectDish(this, '菠萝咕噜肉')">
+          <span class="emoji">🍍</span>
+          <span class="name">菠萝咕噜肉</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '可乐鸡翅')">
+          <span class="emoji">🍗</span>
+          <span class="name">可乐鸡翅</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '糖醋排骨')">
+          <span class="emoji">🍖</span>
+          <span class="name">糖醋排骨</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '麻婆豆腐')">
+          <span class="emoji">🍲</span>
+          <span class="name">麻婆豆腐</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '宫保鸡丁')">
+          <span class="emoji">🥘</span>
+          <span class="name">宫保鸡丁</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '鱼香肉丝')">
+          <span class="emoji">🍜</span>
+          <span class="name">鱼香肉丝</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '红烧茄子')">
+          <span class="emoji">🍆</span>
+          <span class="name">红烧茄子</span>
+        </div>
+        <div class="menu-item" onclick="selectDish(this, '番茄炒蛋')">
+          <span class="emoji">🍅</span>
+          <span class="name">番茄炒蛋</span>
+        </div>
+      </div>
+      <button class="confirm-btn" id="confirmBtn" style="display: none;">确认点单 🎉</button>
+    </div>
+    
     <div class="menu-section" id="menuSection">
       <div class="menu-title">🍽️ 琦琦想吃什么？</div>
       <div class="menu-grid">
@@ -328,7 +367,7 @@
         messageEl.style.color = '#2e7d32';
         
         // 显示菜单
-        document.getElementById('menuSection').classList.add('show');
+        document.getElementById('menuSection').style.display = 'block';
       } else {
         messageEl.innerHTML = '😢 好吧... 华华会等你的！<br>（开玩笑的，下次再约～）';
         messageEl.style.background = 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)';
@@ -352,7 +391,7 @@
       }
       
       // 显示确认按钮
-      document.getElementById('confirmBtn').classList.add('show');
+      document.getElementById('confirmBtn').style.display = 'block';
     }
     
     function confirmDish() {
