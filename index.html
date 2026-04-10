@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>晚餐邀请函 🍽️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+    
+    .emoji-header {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    h1 {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .info-item {
+      margin: 15px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    
+    .info-item .label {
+      font-weight: bold;
+      color: #667eea;
+    }
+    
+    .info-item .emoji {
+      margin-right: 8px;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform: scale(1);
+    }
+    
+    .btn-yes {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .btn-yes:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-no {
+      background: #f0f0f0;
+      color: #666;
+    }
+    
+    .btn-no:hover {
+      background: #e0e0e0;
+    }
+    
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f00;
+      animation: fall 3s linear forwards;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    .message {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+      border-radius: 15px;
+      color: #d63384;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .message.show {
+      display: block;
+      animation: popIn 0.5s ease;
+    }
+    
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .footer {
+      margin-top: 30px;
+      color: #999;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji-header">🍽️✨</div>
+    
+    <h1>晚餐邀请函</h1>
+    
+    <p class="subtitle">
+      亲爱的 <strong>琦琦</strong>，<br>
+      华华诚挚地邀请你共进晚餐！
+    </p>
+    
+    <div class="info-card">
+      <div class="info-item">
+        <span class="emoji">📅</span>
+        <span class="label">时间：</span>
+        <span>明天晚上</span>
+      </div>
+      <div class="info-item">
+        <span class="emoji">📍</span>
+        <span class="label">地点：</span>
+        <span>华华家</span>
+      </div>
+      <div class="info-item">
+        <span class="emoji">👨‍🍳</span>
+        <span class="label">邀请人：</span>
+        <span>华华</span>
+      </div>
+    </div>
+    
+    <div class="buttons">
+      <button class="btn btn-yes" onclick="handleResponse(true)">接受 ✅</button>
+      <button class="btn btn-no" onclick="handleResponse(false)">拒绝 ❌</button>
+    </div>
+    
+    <div class="message" id="message"></div>
+    
+    <div class="footer">
+      期待你的到来！🎉
+    </div>
+  </div>
+  
+  <script>
+    function handleResponse(accepted) {
+      const messageEl = document.getElementById('message');
+      
+      if (accepted) {
+        messageEl.innerHTML = '🎉 太棒了！琦琦接受邀请！<br>明天晚上见！';
+        messageEl.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
+        messageEl.style.color = '#2e7d32';
+        createConfetti();
+      } else {
+        messageEl.innerHTML = '😢 好吧... 华华会等你的！<br>（开玩笑的，下次再约～）';
+        messageEl.style.background = 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)';
+        messageEl.style.color = '#e65100';
+      }
+      
+      messageEl.classList.add('show');
+      
+      // 隐藏按钮
+      document.querySelector('.buttons').style.display = 'none';
+    }
+    
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
+      
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          document.body.appendChild(confetti);
+          
+          // 清理
+          setTimeout(() => confetti.remove(), 4000);
+        }, i * 30);
+      }
+    }
+  </script>
+</body>
+</html>
