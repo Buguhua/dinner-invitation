@@ -231,84 +231,6 @@
       <button class="btn btn-no" onclick="handleResponse(false)">拒绝 ❌</button>
     </div>
     
-    <div class="menu-section" id="menuSection" style="display: none;">
-      <div class="menu-title">🍽️ 琦琦想吃什么？</div>
-      <div class="menu-grid">
-        <div class="menu-item" onclick="selectDish(this, '菠萝咕噜肉')">
-          <span class="emoji">🍍</span>
-          <span class="name">菠萝咕噜肉</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '可乐鸡翅')">
-          <span class="emoji">🍗</span>
-          <span class="name">可乐鸡翅</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '糖醋排骨')">
-          <span class="emoji">🍖</span>
-          <span class="name">糖醋排骨</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '麻婆豆腐')">
-          <span class="emoji">🍲</span>
-          <span class="name">麻婆豆腐</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '宫保鸡丁')">
-          <span class="emoji">🥘</span>
-          <span class="name">宫保鸡丁</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '鱼香肉丝')">
-          <span class="emoji">🍜</span>
-          <span class="name">鱼香肉丝</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '红烧茄子')">
-          <span class="emoji">🍆</span>
-          <span class="name">红烧茄子</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '番茄炒蛋')">
-          <span class="emoji">🍅</span>
-          <span class="name">番茄炒蛋</span>
-        </div>
-      </div>
-      <button class="confirm-btn" id="confirmBtn" style="display: none;">确认点单 🎉</button>
-    </div>
-    
-    <div class="menu-section" id="menuSection">
-      <div class="menu-title">🍽️ 琦琦想吃什么？</div>
-      <div class="menu-grid">
-        <div class="menu-item" onclick="selectDish(this, '菠萝咕噜肉')">
-          <span class="emoji">🍍</span>
-          <span class="name">菠萝咕噜肉</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '可乐鸡翅')">
-          <span class="emoji">🍗</span>
-          <span class="name">可乐鸡翅</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '糖醋排骨')">
-          <span class="emoji">🍖</span>
-          <span class="name">糖醋排骨</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '麻婆豆腐')">
-          <span class="emoji">🍲</span>
-          <span class="name">麻婆豆腐</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '宫保鸡丁')">
-          <span class="emoji">🥘</span>
-          <span class="name">宫保鸡丁</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '鱼香肉丝')">
-          <span class="emoji">🍜</span>
-          <span class="name">鱼香肉丝</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '红烧茄子')">
-          <span class="emoji">🍆</span>
-          <span class="name">红烧茄子</span>
-        </div>
-        <div class="menu-item" onclick="selectDish(this, '番茄炒蛋')">
-          <span class="emoji">🍅</span>
-          <span class="name">番茄炒蛋</span>
-        </div>
-      </div>
-      <button class="confirm-btn" id="confirmBtn" onclick="confirmDish()">确认点单 🎉</button>
-    </div>
-    
     <div class="menu-section" id="menuSection">
       <div class="menu-title">🍽️ 琦琦想吃什么？</div>
       <div class="menu-grid">
@@ -356,7 +278,7 @@
   </div>
   
   <script>
-    let selectedDishes = [];
+    let selectedDish = null;
     
     function handleResponse(accepted) {
       const messageEl = document.getElementById('message');
@@ -367,7 +289,7 @@
         messageEl.style.color = '#2e7d32';
         
         // 显示菜单
-        document.getElementById('menuSection').style.display = 'block';
+        document.getElementById('menuSection').classList.add('show');
       } else {
         messageEl.innerHTML = '😢 好吧... 华华会等你的！<br>（开玩笑的，下次再约～）';
         messageEl.style.background = 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)';
@@ -381,25 +303,24 @@
     }
     
     function selectDish(element, dishName) {
-      // 切换选中状态
-      if (element.classList.contains('selected')) {
-        element.classList.remove('selected');
-        selectedDishes = selectedDishes.filter(dish => dish !== dishName);
-      } else {
-        element.classList.add('selected');
-        selectedDishes.push(dishName);
-      }
+      // 移除其他选项的选中状态
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('selected');
+      });
+      
+      // 选中当前选项
+      element.classList.add('selected');
+      selectedDish = dishName;
       
       // 显示确认按钮
-      document.getElementById('confirmBtn').style.display = 'block';
+      document.getElementById('confirmBtn').classList.add('show');
     }
     
     function confirmDish() {
-      if (selectedDishes.length === 0) return;
+      if (!selectedDish) return;
       
       const finalMessageEl = document.getElementById('finalMessage');
-      const dishesString = selectedDishes.join(', ');
-      finalMessageEl.innerHTML = `🎉 好哒！琦琦点了 <strong>${dishesString}</strong>！<br>华华明天准备好～`;
+      finalMessageEl.innerHTML = `🎉 好哒！琦琦点了 <strong>${selectedDish}</strong>！<br>华华明天准备好～`; 
       finalMessageEl.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
       finalMessageEl.style.color = '#2e7d32';
       finalMessageEl.classList.add('show');
@@ -408,24 +329,6 @@
       
       // 隐藏菜单
       document.getElementById('menuSection').style.display = 'none';
-      
-      // 发送微信通知
-      sendWeChatNotification(dishesString);
-    }
-    
-    function sendWeChatNotification(dishesString) {
-      fetch('https://api.openclaw.ai/notify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_WECHAT_NOTIFICATION_TOKEN'
-        },
-        body: JSON.stringify({
-          message: `琦琦选择了以下菜品：${dishesString}`
-        })
-      }).then(response => response.json())
-        .then(data => console.log('Success:', data))
-        .catch((error) => console.error('Error:', error));
     }
   </script>
     
